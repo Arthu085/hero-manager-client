@@ -3,7 +3,7 @@ import type { ColumnsType } from "antd/es/table";
 import type { IUserListData } from "../../../domain/dtos/user-list-response.dto";
 import type { IStatusDto } from "../../../../../shared/domain/dtos/status.dto";
 import { AppStatusTag } from "../../../../../shared/components/tags/app-status-tag";
-import { AppTableActions } from "../../../../../shared/components/tables/app-action-table";
+import { AppActionsTable } from "../../../../../shared/components/tables/app-action-table";
 
 interface GetUserColumnsProps {
 	onEdit: (user: IUserListData) => void;
@@ -57,7 +57,7 @@ export const getUserColumns = ({
 		title: "Ações",
 		key: "actions",
 		render: (_, record) => (
-			<AppTableActions
+			<AppActionsTable
 				entityName="Usuário"
 				onEdit={() => onEdit(record)}
 				onDetails={() => onDetails(record)}

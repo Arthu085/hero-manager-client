@@ -1,9 +1,24 @@
-import { UserAddOutlined, UserOutlined } from "@ant-design/icons";
+import {
+	ProjectOutlined,
+	UserAddOutlined,
+	UserOutlined,
+} from "@ant-design/icons";
 import type { IDashboardItem } from "../../domain/interfaces/dashboard-item.interface";
-import { UserRoutesEnum } from "../../../../core/enums/app-routes.enum";
+import {
+	ProjectRoutesEnum,
+	UserRoutesEnum,
+} from "../../../../core/enums/app-routes.enum";
 import { RoleEnum } from "../../../../shared/domain/enums/role.enum";
 
 export const dashboardItems: IDashboardItem[] = [
+	{
+		title: "Gestão de Projetos",
+		subtitle: "Gerenciar projetos do sistema",
+		icon: <ProjectOutlined />,
+		to: ProjectRoutesEnum.PROJECTS,
+		iconColor: "#1677ff",
+		allowedRoles: [RoleEnum.ADMIN, RoleEnum.USUARIO],
+	},
 	{
 		title: "Gestão de Usuários",
 		subtitle: "Gerenciar usuários do sistema",

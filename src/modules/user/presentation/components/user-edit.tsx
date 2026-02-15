@@ -1,4 +1,4 @@
-import { userService } from "../../infrastructure/user.service";
+import { userService } from "../../infra/user.service";
 import { Form } from "antd";
 import {
 	userUpdateSchema,

@@ -4,7 +4,7 @@ import type { IDetailsProps } from "../../../../shared/domain/interfaces/details
 import { useFetchModal } from "../../../../shared/hooks/use-fetch-modal";
 import { formatDate } from "../../../../shared/utils/date.util";
 import type { IUserDetailsData } from "../../domain/dtos/user-details-response.dto";
-import { userService } from "../../infrastructure/user.service";
+import { userService } from "../../infra/user.service";
 import { Descriptions, Tag } from "antd";
 
 export const UserDetails = ({ open, onClose, uuid }: IDetailsProps) => {

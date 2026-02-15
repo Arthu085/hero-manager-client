@@ -2,6 +2,7 @@ import {
 	AuthRoutesEnum,
 	DashboardRoutesEnum,
 	NotFoundRoutesEnum,
+	ProjectRoutesEnum,
 	UserRoutesEnum,
 } from "../enums/app-routes.enum";
 import { Navigate } from "react-router-dom";
@@ -16,6 +17,7 @@ import { RegisterPage } from "../../modules/auth/presentation/pages/register.pag
 import { DashboardPage } from "../../modules/dashboard/presentation/pages/dashboard.page";
 import { ProfilePage } from "../../modules/profile/presentation/pages/profile.page";
 import { UserPage } from "../../modules/user/presentation/pages/user.page";
+import { ProjectPage } from "../../modules/project/presentation/pages/project.page";
 
 export const routesConfig: IAppRoute[] = [
 	{
@@ -57,6 +59,10 @@ export const routesConfig: IAppRoute[] = [
 					{
 						path: UserRoutesEnum.PROFILE,
 						element: <ProfilePage />,
+					},
+					{
+						path: ProjectRoutesEnum.PROJECTS,
+						element: <ProjectPage />,
 					},
 				],
 			},

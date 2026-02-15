@@ -1,45 +1,46 @@
 import { Typography, Card, Row, Col } from "antd";
-import type { IUserListData } from "../../domain/dtos/user-list-response.dto";
-import { userService } from "../../infra/user.service";
-import { UserList } from "../components/user-list";
-import type { IUserFilterDto } from "../../domain/dtos/user-filter.dto";
+import { ProjectList } from "../components/project-list";
 import { useModals } from "../../../../shared/hooks/use-modals";
 import { useList } from "../../../../shared/hooks/use-list";
 import { StatusEnum } from "../../../../shared/domain/enums/status.enum";
 import { useRowAction } from "../../../../shared/hooks/use-row-action";
 import { AppButton } from "../../../../shared/components/buttons/app-buton";
 import { StatusFilter } from "../../../../shared/components/filters/app-status-filter";
-import { RoleFilter } from "../../../../shared/components/filters/app-role-filter";
+import { ProjectCreate } from "../components/project-create";
+import { ProjectEdit } from "../components/project-edit";
+import { ProjectDetails } from "../components/project-details";
+import type { IProjectListData } from "../../domain/dtos/project-list-response.dto";
+import type { IProjectFilterDto } from "../../domain/dtos/project-filter.dto";
+import { projectService } from "../../infra/project.service";
 import { AppSearchFilter } from "../../../../shared/components/filters/app-search-filter";
-import { UserCreate } from "../components/user-create";
-import { UserEdit } from "../components/user-edit";
-import { UserDetails } from "../components/user-details";
+import { ProjectStatusFilter } from "../components/filters/project-status-filter";
+import { AppUserFilterSelect } from "../../../../shared/components/selects/user/app-user-filter-select";
 
 const { Title } = Typography;
 
-export const UserPage = () => {
+export const ProjectPage = () => {
 	const modals = useModals<string>();
 	const {
 		loading,
-		data: users,
+		data: projects,
 		meta,
 		filters,
 		handleFilterChange,
 		handlePageChange,
 		refresh,
-	} = useList<IUserListData, IUserFilterDto>(userService.findAll, {
+	} = useList<IProjectListData, IProjectFilterDto>(projectService.findAll, {
 		page: 1,
 		limit: 10,
 		status: StatusEnum.ATIVO,
 	});
 
 	const { handleAction: handleChangeStatus } = useRowAction(
-		userService.updateStatus,
+		projectService.updateStatus,
 		refresh,
 	);
 
 	const { handleAction: handleDelete } = useRowAction(
-		userService.delete,
+		projectService.delete,
 		refresh,
 	);
 
@@ -50,13 +51,13 @@ export const UserPage = () => {
 				align={"middle"}
 				style={{ marginBottom: 16 }}>
 				<Col flex="auto">
-					<Title level={2}>Usuários</Title>
+					<Title level={2}>Projetos</Title>
 				</Col>
 				<Col
 					flex="none"
 					style={{ display: "flex", justifyContent: "flex-end" }}>
 					<AppButton
-						label="Novo Usuário"
+						label="Novo Projeto"
 						type="primary"
 						onClick={() => modals.openCreate()}
 					/>
@@ -64,19 +65,27 @@ export const UserPage = () => {
 			</Row>
 			<Card>
 				<Row gutter={[16, 16]} style={{ marginBottom: 16 }}>
-					<Col xs={24} sm={24} md={12} lg={12} xl={4}>
+					<Col xs={24} sm={24} md={12} lg={4} xl={4}>
 						<StatusFilter
 							value={filters.status}
 							onChange={(val) => handleFilterChange("status", val)}
 						/>
 					</Col>
-					<Col xs={24} sm={24} md={12} lg={12} xl={6}>
-						<RoleFilter
-							value={filters.role}
-							onChange={(val) => handleFilterChange("role", val)}
+					<Col xs={24} sm={24} md={12} lg={10} xl={6}>
+						<ProjectStatusFilter
+							value={filters.projectStatus}
+							onChange={(val) => handleFilterChange("projectStatus", val)}
 						/>
 					</Col>
-					<Col xs={24} sm={24} md={12} lg={12} xl={7}>
+					<Col xs={24} sm={24} md={12} lg={10} xl={6}>
+						<AppUserFilterSelect
+							label="Responsável"
+							placeholder="Buscar pelo responsável do projeto..."
+							value={filters.user}
+							onChange={(val) => handleFilterChange("user", val)}
+						/>
+					</Col>
+					<Col xs={24} sm={24} md={12} lg={12} xl={8}>
 						<AppSearchFilter
 							label="Nome"
 							placeholder="Buscar pelo nome..."
@@ -84,28 +93,20 @@ export const UserPage = () => {
 							onChange={(val) => handleFilterChange("name", val)}
 						/>
 					</Col>
-					<Col xs={24} sm={24} md={12} lg={12} xl={7}>
-						<AppSearchFilter
-							label="Personagem"
-							placeholder="Buscar pelo nome do personagem..."
-							value={filters.character}
-							onChange={(val) => handleFilterChange("character", val)}
-						/>
-					</Col>
 				</Row>
-				<UserList
+				<ProjectList
 					loading={loading}
-					users={users}
+					projects={projects}
 					total={meta.total}
 					page={filters.page}
 					pageSize={filters.limit}
 					onChangePage={handlePageChange}
-					onEdit={(user) => modals.openEdit(user.uuid)}
-					onDetails={(user) => modals.openDetails(user.uuid)}
+					onEdit={(project) => modals.openEdit(project.uuid)}
+					onDetails={(project) => modals.openDetails(project.uuid)}
 					onStatus={handleChangeStatus}
 					onDelete={handleDelete}
 				/>
-				<UserCreate
+				<ProjectCreate
 					open={modals.isCreateOpen}
 					onClose={modals.closeCreate}
 					onSuccess={() => {
@@ -113,7 +114,7 @@ export const UserPage = () => {
 						refresh();
 					}}
 				/>
-				<UserEdit
+				<ProjectEdit
 					open={modals.isEditOpen}
 					uuid={modals.selectedUuid}
 					onClose={modals.closeEdit}
@@ -122,7 +123,7 @@ export const UserPage = () => {
 						refresh();
 					}}
 				/>
-				<UserDetails
+				<ProjectDetails
 					open={modals.isDetailsOpen}
 					uuid={modals.selectedUuid}
 					onClose={modals.closeDetails}

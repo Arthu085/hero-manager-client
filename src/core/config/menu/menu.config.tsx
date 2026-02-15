@@ -1,11 +1,13 @@
 import {
 	DashboardOutlined,
 	LogoutOutlined,
+	ProjectOutlined,
 	UserAddOutlined,
 	UserOutlined,
 } from "@ant-design/icons";
 import {
 	DashboardRoutesEnum,
+	ProjectRoutesEnum,
 	UserRoutesEnum,
 } from "../../enums/app-routes.enum";
 import type { IAppMenuItem } from "../../interfaces/menu/app-menu.interface";
@@ -17,6 +19,12 @@ export const topMenuItems: IAppMenuItem[] = [
 		key: DashboardRoutesEnum.HOME,
 		icon: <DashboardOutlined />,
 		label: <Link to={DashboardRoutesEnum.HOME}>Dashboard</Link>,
+	},
+	{
+		key: ProjectRoutesEnum.PROJECTS,
+		icon: <ProjectOutlined />,
+		label: <Link to={ProjectRoutesEnum.PROJECTS}>Projetos</Link>,
+		allowedRoles: [RoleEnum.ADMIN, RoleEnum.USUARIO],
 	},
 	{
 		key: UserRoutesEnum.USERS,

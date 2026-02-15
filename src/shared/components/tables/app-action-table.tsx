@@ -10,7 +10,7 @@ import { StatusEnum } from "../../domain/enums/status.enum";
 import type { IStatusDto } from "../../domain/dtos/status.dto";
 import { AppButton } from "../buttons/app-buton";
 
-interface AppTableActionsProps {
+interface AppActionsTableProps {
 	entityName?: string;
 	onEdit?: () => void;
 	onDetails?: () => void;
@@ -19,14 +19,14 @@ interface AppTableActionsProps {
 	onStatus?: (dto: IStatusDto) => Promise<void> | void;
 }
 
-export const AppTableActions = ({
+export const AppActionsTable = ({
 	entityName = "Usuário",
 	onEdit,
 	onDetails,
 	onDelete,
 	onStatus,
 	currentStatus,
-}: AppTableActionsProps) => {
+}: AppActionsTableProps) => {
 	const screens = Grid.useBreakpoint();
 	const isMobile = screens.xs && !screens.sm;
 
