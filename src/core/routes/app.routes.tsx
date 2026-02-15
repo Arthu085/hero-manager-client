@@ -11,6 +11,11 @@ import { AuthLayout } from "../components/layouts/auth.layout";
 import { AuthGuard } from "../components/guards/auth.guard";
 import { MainLayout } from "../components/layouts/main.layout";
 import type { IAppRoute } from "../interfaces/config/route-config.interface";
+import { LoginPage } from "../../modules/auth/presentation/pages/login.page";
+import { RegisterPage } from "../../modules/auth/presentation/pages/register.page";
+import { DashboardPage } from "../../modules/dashboard/presentation/pages/dashboard.page";
+import { ProfilePage } from "../../modules/profile/presentation/pages/profile.page";
+import { UserPage } from "../../modules/user/presentation/pages/user.page";
 
 export const routesConfig: IAppRoute[] = [
 	{
@@ -19,14 +24,14 @@ export const routesConfig: IAppRoute[] = [
 			{
 				element: <AuthLayout />,
 				children: [
-					// {
-					// 	path: AuthRoutesEnum.LOGIN,
-					// 	element: <LoginPage />,
-					// },
-					// {
-					// 	path: AuthRoutesEnum.REGISTER,
-					// 	element: <RegisterPage />,
-					// },
+					{
+						path: AuthRoutesEnum.LOGIN,
+						element: <LoginPage />,
+					},
+					{
+						path: AuthRoutesEnum.REGISTER,
+						element: <RegisterPage />,
+					},
 					{
 						path: "/auth",
 						element: <Navigate to={AuthRoutesEnum.LOGIN} replace />,
@@ -41,18 +46,18 @@ export const routesConfig: IAppRoute[] = [
 			{
 				element: <MainLayout />,
 				children: [
-					// {
-					// 	path: DashboardRoutesEnum.HOME,
-					// 	element: <DashboardPage />,
-					// },
-					// {
-					// 	path: UserRoutesEnum.USERS,
-					// 	element: <UserPage />,
-					// },
-					// {
-					// 	path: UserRoutesEnum.PROFILE,
-					// 	element: <ProfilePage />,
-					// },
+					{
+						path: DashboardRoutesEnum.HOME,
+						element: <DashboardPage />,
+					},
+					{
+						path: UserRoutesEnum.USERS,
+						element: <UserPage />,
+					},
+					{
+						path: UserRoutesEnum.PROFILE,
+						element: <ProfilePage />,
+					},
 				],
 			},
 		],
