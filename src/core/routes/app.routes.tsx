@@ -15,6 +15,7 @@ import { LoginPage } from "../../modules/auth/presentation/pages/login.page";
 import { RegisterPage } from "../../modules/auth/presentation/pages/register.page";
 import { DashboardPage } from "../../modules/dashboard/presentation/pages/dashboard.page";
 import { ProfilePage } from "../../modules/profile/presentation/pages/profile.page";
+import { UserPage } from "../../modules/user/presentation/pages/user.page";
 
 export const routesConfig: IAppRoute[] = [
 	{
@@ -49,10 +50,10 @@ export const routesConfig: IAppRoute[] = [
 						path: DashboardRoutesEnum.HOME,
 						element: <DashboardPage />,
 					},
-					// {
-					// 	path: UserRoutesEnum.USERS,
-					// 	element: <UserPage />,
-					// },
+					{
+						path: UserRoutesEnum.USERS,
+						element: <UserPage />,
+					},
 					{
 						path: UserRoutesEnum.PROFILE,
 						element: <ProfilePage />,
