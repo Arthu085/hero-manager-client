@@ -4,6 +4,7 @@ import type { IDetailsProps } from "../../../../shared/domain/interfaces/details
 import { useFetchModal } from "../../../../shared/hooks/use-fetch-modal";
 import { formatDate } from "../../../../shared/utils/date.util";
 import type { IProjectDetailsData } from "../../domain/dtos/project-details-response.dto";
+import { ProjectStatusEnum } from "../../domain/enums/project-status.enum";
 import { projectService } from "../../infra/project.service";
 import { Descriptions, Tag } from "antd";
 
@@ -29,7 +30,18 @@ export const ProjectDetails = ({ open, onClose, uuid }: IDetailsProps) => {
 						{project.description}
 					</Descriptions.Item>
 					<Descriptions.Item label="Status do Projeto">
-						<Tag color="green">
+						<Tag
+							color={
+								project.projectStatus?.value === ProjectStatusEnum.PENDING
+									? "orange"
+									: project.projectStatus?.value ===
+										  ProjectStatusEnum.IN_PROGRESS
+										? "blue"
+										: project.projectStatus?.value ===
+											  ProjectStatusEnum.COMPLETED
+											? "green"
+											: "gray"
+							}>
 							{project.projectStatus?.label || project.projectStatus}
 						</Tag>
 					</Descriptions.Item>

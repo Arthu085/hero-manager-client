@@ -12,6 +12,9 @@ import { ProjectDetails } from "../components/project-details";
 import type { IProjectListData } from "../../domain/dtos/project-list-response.dto";
 import type { IProjectFilterDto } from "../../domain/dtos/project-filter.dto";
 import { projectService } from "../../infra/project.service";
+import { AppSearchFilter } from "../../../../shared/components/filters/app-search-filter";
+import { ProjectStatusFilter } from "../components/filters/project-status-filter";
+import { AppUserFilterSelect } from "../../../../shared/components/selects/user/app-user-filter-select";
 
 const { Title } = Typography;
 
@@ -62,10 +65,32 @@ export const ProjectPage = () => {
 			</Row>
 			<Card>
 				<Row gutter={[16, 16]} style={{ marginBottom: 16 }}>
-					<Col xs={24} sm={24} md={12} lg={12} xl={4}>
+					<Col xs={24} sm={24} md={12} lg={4} xl={4}>
 						<StatusFilter
 							value={filters.status}
 							onChange={(val) => handleFilterChange("status", val)}
+						/>
+					</Col>
+					<Col xs={24} sm={24} md={12} lg={10} xl={6}>
+						<ProjectStatusFilter
+							value={filters.projectStatus}
+							onChange={(val) => handleFilterChange("projectStatus", val)}
+						/>
+					</Col>
+					<Col xs={24} sm={24} md={12} lg={10} xl={6}>
+						<AppUserFilterSelect
+							label="Responsável"
+							placeholder="Buscar pelo responsável do projeto..."
+							value={filters.user}
+							onChange={(val) => handleFilterChange("user", val)}
+						/>
+					</Col>
+					<Col xs={24} sm={24} md={12} lg={12} xl={8}>
+						<AppSearchFilter
+							label="Nome"
+							placeholder="Buscar pelo nome..."
+							value={filters.name}
+							onChange={(val) => handleFilterChange("name", val)}
 						/>
 					</Col>
 				</Row>
