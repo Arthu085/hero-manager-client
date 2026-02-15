@@ -4,7 +4,7 @@ export const getErrorMessage = (error: unknown): string => {
 	if (isAxiosError(error)) {
 		if (!error.response) {
 			if (error.code === "ECONNABORTED") {
-				return "Tempo excedido ao conectar com o servidor.";
+				return "Tempo excedido ao conectar com o servidor";
 			}
 
 			return "Não foi possível conectar com o servidor";

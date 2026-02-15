@@ -13,6 +13,7 @@ import { MainLayout } from "../components/layouts/main.layout";
 import type { IAppRoute } from "../interfaces/config/route-config.interface";
 import { LoginPage } from "../../modules/auth/presentation/pages/login.page";
 import { RegisterPage } from "../../modules/auth/presentation/pages/register.page";
+import { DashboardPage } from "../../modules/dashboard/presentation/pages/dashboard.page";
 
 export const routesConfig: IAppRoute[] = [
 	{
@@ -43,10 +44,10 @@ export const routesConfig: IAppRoute[] = [
 			{
 				element: <MainLayout />,
 				children: [
-					// {
-					// 	path: DashboardRoutesEnum.HOME,
-					// 	element: <DashboardPage />,
-					// },
+					{
+						path: DashboardRoutesEnum.HOME,
+						element: <DashboardPage />,
+					},
 					// {
 					// 	path: UserRoutesEnum.USERS,
 					// 	element: <UserPage />,
