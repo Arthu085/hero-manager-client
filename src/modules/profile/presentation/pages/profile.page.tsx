@@ -1,5 +1,5 @@
 import { Typography, Card, Skeleton } from "antd";
-import { profileService } from "../../infrastructure/services/profile.service";
+import { profileService } from "../../infra/services/profile.service";
 import type { IProfileData } from "../../domain/dtos/profile-response.dto";
 import { ProfileDetails } from "../components/profile-details";
 import { useFetchData } from "../../../../shared/hooks/use-fetch-data";

@@ -12,6 +12,10 @@ export enum UserRoutesEnum {
 	PROFILE = "/users/profile",
 }
 
+export enum ProjectRoutesEnum {
+	PROJECTS = "/projects",
+}
+
 export enum NotFoundRoutesEnum {
 	NOT_FOUND = "*",
 }
