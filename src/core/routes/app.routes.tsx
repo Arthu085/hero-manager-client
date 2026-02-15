@@ -1,0 +1,64 @@
+import {
+	AuthRoutesEnum,
+	DashboardRoutesEnum,
+	NotFoundRoutesEnum,
+	UserRoutesEnum,
+} from "../enums/app-routes.enum";
+import { Navigate } from "react-router-dom";
+import { NotFoundPage } from "../pages/not-found.page";
+import { GuestGuard } from "../components/guards/guest.guard";
+import { AuthLayout } from "../components/layouts/auth.layout";
+import { AuthGuard } from "../components/guards/auth.guard";
+import { MainLayout } from "../components/layouts/main.layout";
+import type { IAppRoute } from "../interfaces/config/route-config.interface";
+
+export const routesConfig: IAppRoute[] = [
+	{
+		element: <GuestGuard />,
+		children: [
+			{
+				element: <AuthLayout />,
+				children: [
+					// {
+					// 	path: AuthRoutesEnum.LOGIN,
+					// 	element: <LoginPage />,
+					// },
+					// {
+					// 	path: AuthRoutesEnum.REGISTER,
+					// 	element: <RegisterPage />,
+					// },
+					{
+						path: "/auth",
+						element: <Navigate to={AuthRoutesEnum.LOGIN} replace />,
+					},
+				],
+			},
+		],
+	},
+	{
+		element: <AuthGuard />,
+		children: [
+			{
+				element: <MainLayout />,
+				children: [
+					// {
+					// 	path: DashboardRoutesEnum.HOME,
+					// 	element: <DashboardPage />,
+					// },
+					// {
+					// 	path: UserRoutesEnum.USERS,
+					// 	element: <UserPage />,
+					// },
+					// {
+					// 	path: UserRoutesEnum.PROFILE,
+					// 	element: <ProfilePage />,
+					// },
+				],
+			},
+		],
+	},
+	{
+		path: NotFoundRoutesEnum.NOT_FOUND,
+		element: <NotFoundPage />,
+	},
+];
