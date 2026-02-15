@@ -11,6 +11,8 @@ import { AuthLayout } from "../components/layouts/auth.layout";
 import { AuthGuard } from "../components/guards/auth.guard";
 import { MainLayout } from "../components/layouts/main.layout";
 import type { IAppRoute } from "../interfaces/config/route-config.interface";
+import { LoginPage } from "../../modules/auth/presentation/pages/login.page";
+import { RegisterPage } from "../../modules/auth/presentation/pages/register.page";
 
 export const routesConfig: IAppRoute[] = [
 	{
@@ -19,14 +21,14 @@ export const routesConfig: IAppRoute[] = [
 			{
 				element: <AuthLayout />,
 				children: [
-					// {
-					// 	path: AuthRoutesEnum.LOGIN,
-					// 	element: <LoginPage />,
-					// },
-					// {
-					// 	path: AuthRoutesEnum.REGISTER,
-					// 	element: <RegisterPage />,
-					// },
+					{
+						path: AuthRoutesEnum.LOGIN,
+						element: <LoginPage />,
+					},
+					{
+						path: AuthRoutesEnum.REGISTER,
+						element: <RegisterPage />,
+					},
 					{
 						path: "/auth",
 						element: <Navigate to={AuthRoutesEnum.LOGIN} replace />,
