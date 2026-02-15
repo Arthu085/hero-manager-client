@@ -22,9 +22,10 @@ export const ProjectDetails = ({ open, onClose, uuid }: IDetailsProps) => {
 			open={open}
 			onCancel={onClose}
 			hideFooter
-			loading={loading}>
+			loading={loading}
+			width={1300}>
 			{project ? (
-				<Descriptions column={1} bordered size="small" layout="horizontal">
+				<Descriptions column={2} bordered size="middle" layout="horizontal">
 					<Descriptions.Item label="Nome">{project.name}</Descriptions.Item>
 					<Descriptions.Item label="Descrição">
 						{project.description}
