@@ -61,6 +61,7 @@ export const AppUserSelect = ({
 			mapOption={(user) => ({
 				label: user.name,
 				value: user.uuid,
+				description: user.character,
 			})}
 			{...rest}
 		/>

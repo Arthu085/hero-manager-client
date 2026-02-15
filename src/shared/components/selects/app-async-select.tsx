@@ -27,7 +27,11 @@ export interface AppAsyncSelectProps<T = any> extends Omit<
 		search: string;
 		page: number;
 	}) => Promise<FetchResult<T>>;
-	mapOption: (item: T) => { label: React.ReactNode; value: string | number };
+	mapOption: (item: T) => {
+		label: React.ReactNode;
+		value: string | number;
+		description?: string;
+	};
 	debounceTime?: number;
 	refetchOnOpen?: boolean;
 	name?: string | (string | number)[];
@@ -189,6 +193,32 @@ export const AppAsyncSelect = <T,>({
 		[fetching],
 	);
 
+	const optionRender = useCallback((option: any) => {
+		const hasDescription = option.data?.description;
+
+		if (!hasDescription) {
+			return option.label;
+		}
+
+		return (
+			<div
+				style={{
+					display: "flex",
+					flexDirection: "column",
+					gap: "2px",
+				}}>
+				<div>{option.label}</div>
+				<div
+					style={{
+						fontSize: "12px",
+						color: "rgba(0, 0, 0, 0.45)",
+					}}>
+					{option.data.description}
+				</div>
+			</div>
+		);
+	}, []);
+
 	const selectNode = (
 		<Select
 			style={{ width: "100%", height: 40, ...props.style }}
@@ -201,6 +231,7 @@ export const AppAsyncSelect = <T,>({
 			allowClear
 			notFoundContent={renderNotFoundContent()}
 			popupRender={renderDropdown}
+			optionRender={optionRender}
 			{...props}
 		/>
 	);

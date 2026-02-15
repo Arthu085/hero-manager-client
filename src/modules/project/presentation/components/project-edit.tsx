@@ -1,4 +1,4 @@
-import { Form } from "antd";
+import { Col, Form, Row } from "antd";
 import type { IEditProps } from "../../../../shared/domain/interfaces/edit.interface";
 import { useFormFetch } from "../../../../shared/hooks/use-form-fetch";
 import { useFormSubmit } from "../../../../shared/hooks/use-form-submit";
@@ -14,6 +14,7 @@ import {
 import { AppTextArea } from "../../../../shared/components/inputs/app-text-area-input";
 import { AppNumberInput } from "../../../../shared/components/inputs/app-number-input";
 import { AppUserSelect } from "../../../../shared/components/selects/user/app-user-select";
+import { projectCreateSchema } from "../../domain/dtos/project-create.dto";
 
 export const ProjectEdit = ({ open, onClose, uuid, onSuccess }: IEditProps) => {
 	const [form] = Form.useForm();
@@ -51,95 +52,116 @@ export const ProjectEdit = ({ open, onClose, uuid, onSuccess }: IEditProps) => {
 			onCancel={onClose}
 			onOk={form.submit}
 			confirmLoading={saving}
-			loading={fetching}>
+			loading={fetching}
+			width={800}>
 			<Form<IProjectUpdateDto>
 				form={form}
 				layout="vertical"
 				onFinish={handleSubmit}
 				disabled={saving}
 				preserve={false}>
-				<AppInput
-					name="name"
-					label="Nome do Projeto"
-					placeholder="Nome do projeto..."
-					zodSchema={projectUpdateSchema.shape.name}
-					maxLength={200}
-				/>
-				<AppTextArea
-					name="description"
-					label="Descrição"
-					placeholder="Descrição do projeto..."
-					zodSchema={projectUpdateSchema.shape.description}
-					maxLength={1000}
-				/>
-				<AppNumberInput
-					name="agility"
-					label="Agilidade"
-					placeholder="Agilidade do projeto..."
-					zodSchema={projectUpdateSchema.shape.agility}
-					max={100}
-					min={0}
-					precision={2}
-					suffix="%"
-				/>
-				<AppNumberInput
-					name="enchantment"
-					label="Encantamento"
-					placeholder="Encantamento do projeto..."
-					zodSchema={projectUpdateSchema.shape.enchantment}
-					max={100}
-					min={0}
-					precision={2}
-					suffix="%"
-				/>
-				<AppNumberInput
-					name="efficiency"
-					label="Eficiência"
-					placeholder="Eficiência do projeto..."
-					zodSchema={projectUpdateSchema.shape.efficiency}
-					max={100}
-					min={0}
-					precision={2}
-					suffix="%"
-				/>
-				<AppNumberInput
-					name="excellence"
-					label="Excelência"
-					placeholder="Excelência do projeto..."
-					zodSchema={projectUpdateSchema.shape.excellence}
-					max={100}
-					min={0}
-					precision={2}
-					suffix="%"
-				/>
-				<AppNumberInput
-					name="transparency"
-					label="Transparência"
-					placeholder="Transparência do projeto..."
-					zodSchema={projectUpdateSchema.shape.transparency}
-					max={100}
-					min={0}
-					precision={2}
-					suffix="%"
-				/>
-				<AppNumberInput
-					name="ambition"
-					label="Ambição"
-					placeholder="Ambição do projeto..."
-					zodSchema={projectUpdateSchema.shape.ambition}
-					max={100}
-					min={0}
-					precision={2}
-					suffix="%"
-				/>
-				<AppUserSelect
-					name="user"
-					label="Responsável"
-					placeholder="Selecione o responsável pelo projeto..."
-					showSearch
-					zodSchema={projectUpdateSchema.shape.user}
-					options={optionsMap.user}
-				/>
+				<Row gutter={16}>
+					<Col xs={24} md={24}>
+						<AppInput
+							name="name"
+							label="Nome do Projeto"
+							placeholder="Nome do projeto..."
+							zodSchema={projectUpdateSchema.shape.name}
+							maxLength={200}
+						/>
+					</Col>
+					<Col xs={24} md={24}>
+						<AppTextArea
+							name="description"
+							label="Descrição"
+							placeholder="Descrição do projeto..."
+							zodSchema={projectUpdateSchema.shape.description}
+							maxLength={1000}
+						/>
+					</Col>
+					<Col xs={24} md={12}>
+						<AppNumberInput
+							name="agility"
+							label="Agilidade"
+							placeholder="Agilidade do projeto..."
+							zodSchema={projectUpdateSchema.shape.agility}
+							max={100}
+							min={0}
+							precision={0}
+							suffix="%"
+						/>
+					</Col>
+					<Col xs={24} md={12}>
+						<AppNumberInput
+							name="enchantment"
+							label="Encantamento"
+							placeholder="Encantamento do projeto..."
+							zodSchema={projectUpdateSchema.shape.enchantment}
+							max={100}
+							min={0}
+							precision={0}
+							suffix="%"
+						/>
+					</Col>
+					<Col xs={24} md={12}>
+						<AppNumberInput
+							name="efficiency"
+							label="Eficiência"
+							placeholder="Eficiência do projeto..."
+							zodSchema={projectUpdateSchema.shape.efficiency}
+							max={100}
+							min={0}
+							precision={0}
+							suffix="%"
+						/>
+					</Col>
+					<Col xs={24} md={12}>
+						<AppNumberInput
+							name="excellence"
+							label="Excelência"
+							placeholder="Excelência do projeto..."
+							zodSchema={projectUpdateSchema.shape.excellence}
+							max={100}
+							min={0}
+							precision={0}
+							suffix="%"
+						/>
+					</Col>
+					<Col xs={24} md={12}>
+						<AppNumberInput
+							name="transparency"
+							label="Transparência"
+							placeholder="Transparência do projeto..."
+							zodSchema={projectUpdateSchema.shape.transparency}
+							max={100}
+							min={0}
+							precision={0}
+							suffix="%"
+						/>
+					</Col>
+					<Col xs={24} md={12}>
+						<AppNumberInput
+							name="ambition"
+							label="Ambição"
+							placeholder="Ambição do projeto..."
+							zodSchema={projectUpdateSchema.shape.ambition}
+							max={100}
+							min={0}
+							precision={0}
+							suffix="%"
+						/>
+					</Col>
+					<Col xs={24} md={24}>
+						<AppUserSelect
+							name="user"
+							label="Responsável"
+							placeholder="Selecione o responsável pelo projeto..."
+							showSearch
+							zodSchema={projectCreateSchema.shape.user}
+							options={optionsMap.user}
+						/>
+					</Col>
+				</Row>
 			</Form>
 		</AppModal>
 	);

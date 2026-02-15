@@ -1,9 +1,10 @@
-import { Tag } from "antd";
+import { Progress, Tag } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import type { IStatusDto } from "../../../../../shared/domain/dtos/status.dto";
 import { AppStatusTag } from "../../../../../shared/components/tags/app-status-tag";
 import { AppActionsTable } from "../../../../../shared/components/tables/app-action-table";
 import type { IProjectListData } from "../../../domain/dtos/project-list-response.dto";
+import { ProjectStatusEnum } from "../../../domain/enums/project-status.enum";
 
 interface GetProjectColumnsProps {
 	onEdit: (project: IProjectListData) => void;
@@ -25,7 +26,7 @@ export const getProjectColumns = ({
 		dataIndex: "name",
 		key: "name",
 		render: (text) => <strong>{text}</strong>,
-		width: 300,
+		width: 250,
 	},
 	{
 		title: "Descrição",
@@ -37,9 +38,20 @@ export const getProjectColumns = ({
 		title: "Status do Projeto",
 		dataIndex: "projectStatus",
 		key: "projectStatus",
-		width: 250,
+		width: 150,
 		render: (projectStatus) => (
-			<Tag color="green">{projectStatus?.label || projectStatus}</Tag>
+			<Tag
+				color={
+					projectStatus?.value === ProjectStatusEnum.PENDING
+						? "orange"
+						: projectStatus?.value === ProjectStatusEnum.IN_PROGRESS
+							? "blue"
+							: projectStatus?.value === ProjectStatusEnum.COMPLETED
+								? "green"
+								: "gray"
+				}>
+				{projectStatus?.label || projectStatus}
+			</Tag>
 		),
 	},
 	{
@@ -53,6 +65,12 @@ export const getProjectColumns = ({
 		dataIndex: "enchantment",
 		key: "enchantment",
 		render: (enchantment) => <span>{enchantment + "%"}</span>,
+	},
+	{
+		title: "Excelência",
+		dataIndex: "excellence",
+		key: "excellence",
+		render: (excellence) => <span>{excellence + "%"}</span>,
 	},
 	{
 		title: "Eficiência",
@@ -76,20 +94,21 @@ export const getProjectColumns = ({
 		title: "Porcentagem de Conclusão",
 		dataIndex: "completionPercentage",
 		key: "completionPercentage",
-		render: (completionPercentage) => <span>{completionPercentage + "%"}</span>,
+		render: (completionPercentage) => (
+			<Progress percent={completionPercentage} />
+		),
+		width: 250,
 	},
 	{
 		title: "Nome do Responsável",
 		dataIndex: "user",
 		key: "user",
-		width: 200,
 		render: (user) => <span>{user?.label || user}</span>,
 	},
 	{
 		title: "Personagem do Responsável",
 		dataIndex: "user",
 		key: "user",
-		width: 200,
 		render: (user) => <span>{user?.label2 || user}</span>,
 	},
 	{
