@@ -1,4 +1,4 @@
-import { Col, Form, Row } from "antd";
+import { Col, Divider, Form, Row, Typography } from "antd";
 import type { IEditProps } from "../../../../shared/domain/interfaces/edit.interface";
 import { useFormFetch } from "../../../../shared/hooks/use-form-fetch";
 import { useFormSubmit } from "../../../../shared/hooks/use-form-submit";
@@ -15,6 +15,8 @@ import { AppTextArea } from "../../../../shared/components/inputs/app-text-area-
 import { AppNumberInput } from "../../../../shared/components/inputs/app-number-input";
 import { AppUserSelect } from "../../../../shared/components/selects/user/app-user-select";
 import { projectCreateSchema } from "../../domain/dtos/project-create.dto";
+7;
+const { Title } = Typography;
 
 export const ProjectEdit = ({ open, onClose, uuid, onSuccess }: IEditProps) => {
 	const [form] = Form.useForm();
@@ -78,6 +80,10 @@ export const ProjectEdit = ({ open, onClose, uuid, onSuccess }: IEditProps) => {
 							zodSchema={projectUpdateSchema.shape.description}
 							maxLength={1000}
 						/>
+					</Col>
+					<Divider style={{ margin: 10 }} />
+					<Col span={24}>
+						<Title level={5}>Métricas</Title>
 					</Col>
 					<Col xs={24} md={12}>
 						<AppNumberInput
@@ -151,6 +157,7 @@ export const ProjectEdit = ({ open, onClose, uuid, onSuccess }: IEditProps) => {
 							suffix="%"
 						/>
 					</Col>
+					<Divider style={{ margin: 10 }} />
 					<Col xs={24} md={24}>
 						<AppUserSelect
 							name="user"

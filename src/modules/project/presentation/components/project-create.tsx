@@ -1,4 +1,4 @@
-import { Col, Form, Row } from "antd";
+import { Col, Divider, Form, Row, Typography } from "antd";
 import type { ICreateProps } from "../../../../shared/domain/interfaces/create.interface";
 import { useFormSubmit } from "../../../../shared/hooks/use-form-submit";
 import { AppModal } from "../../../../shared/components/modals/app-modal";
@@ -11,6 +11,8 @@ import { projectService } from "../../infra/project.service";
 import { AppTextArea } from "../../../../shared/components/inputs/app-text-area-input";
 import { AppNumberInput } from "../../../../shared/components/inputs/app-number-input";
 import { AppUserSelect } from "../../../../shared/components/selects/user/app-user-select";
+
+const { Title } = Typography;
 
 export const ProjectCreate = ({ open, onClose, onSuccess }: ICreateProps) => {
 	const [form] = Form.useForm();
@@ -67,6 +69,10 @@ export const ProjectCreate = ({ open, onClose, onSuccess }: ICreateProps) => {
 							zodSchema={projectCreateSchema.shape.description}
 							maxLength={1000}
 						/>
+					</Col>
+					<Divider style={{ margin: 10 }} />
+					<Col span={24}>
+						<Title level={5}>Métricas</Title>
 					</Col>
 					<Col xs={24} md={12}>
 						<AppNumberInput
@@ -140,6 +146,7 @@ export const ProjectCreate = ({ open, onClose, onSuccess }: ICreateProps) => {
 							suffix="%"
 						/>
 					</Col>
+					<Divider style={{ margin: 10 }} />
 					<Col xs={24} md={24}>
 						<AppUserSelect
 							name="user"
