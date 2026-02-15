@@ -58,7 +58,7 @@ export const MainLayout = () => {
 			}}>
 			<Flex vertical style={{ padding: 16, paddingBottom: 20 }}>
 				<Title level={4} style={{ margin: 0, whiteSpace: "nowrap" }}>
-					Pharmasys
+					Hero Manager
 				</Title>
 			</Flex>
 			<Divider style={{ margin: "0 0 8px 0" }} />

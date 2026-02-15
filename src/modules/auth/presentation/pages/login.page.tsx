@@ -41,7 +41,7 @@ export const LoginPage = () => {
 					<AppInput
 						name="email"
 						label="E-mail"
-						placeholder="exemplo@pharmasys.com"
+						placeholder="exemplo@heromanager.com"
 						prefix={<UserOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
 						zodSchema={loginSchema.shape.email}
 						maxLength={250}

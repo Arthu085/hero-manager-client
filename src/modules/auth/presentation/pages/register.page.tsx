@@ -57,7 +57,7 @@ export const RegisterPage = () => {
 					<AppInput
 						name="email"
 						label="E-mail"
-						placeholder="exemplo@pharmasys.com"
+						placeholder="exemplo@heromanager.com"
 						prefix={<IdcardOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
 						zodSchema={registerSchema.shape.email}
 						maxLength={250}
